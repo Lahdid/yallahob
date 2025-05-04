@@ -1,0 +1,144 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id                  String   @id @default(cuid())
+  fullName            String
+  number              String   @unique
+  email               String   @unique
+  address             String
+  image               String?
+  password            String
+  role                UserRole @default(USER)
+  onBoarding          Int      @default(0)
+  createdAt           DateTime @default(now())
+  firstPartnerName    String?
+  secondPartnerName   String?
+  yearsKnownEachOther Int?
+  yearsMarried        Int?
+  numberOfChildren    Int?
+
+  accounts Account[]
+
+  @@map("users")
+}
+
+enum Type {
+  COUPLE
+  FAMILY
+}
+
+model Question {
+  id        String   @id @default(cuid())
+  question  String
+  category  String
+  type      Type
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("questions")
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  category    Category
+  type        Type
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("articles")
+}
+
+enum Category {
+  FAMILY_COMMUNICATION
+  BONDING
+  LOVE_COMMUNICATION
+  PLEASURE_AND_ACTIVITIES
+  COUPLE_ADVICE
+  WELLBEING_AND_EVOLUTION
+}
+
+model Activity {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  location      String
+  ageRange      String
+  price         Float
+  priceCategory PriceCategory
+  mood          Mood
+  weather       Weather
+  imageUrl      String
+  date          DateTime?
+  type          Type
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("activities")
+}
+
+enum PriceCategory {
+  gratuit
+  abordable
+  modéré
+  coûteux
+}
+
+enum Mood {
+  amusant
+  éducatif
+  relaxant
+  aventureux
+  créatif
+}
+
+enum Weather {
+  intérieur
+  extérieur
+  les_deux
+}
+
+model Budget {
+  id        String   @id @default(cuid())
+  userId    String
+  category  String
+  limit     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, category])
+}

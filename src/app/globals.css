@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 100 100% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --thumb: 216 12.2% 83.9%;
+
+    --page: 210 20% 99%;
+
+    --sidebar: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 182 63% 45%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 340 75% 55%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --pending: 48 91% 72%;
+    --pending-foreground: 210 40% 98%;
+
+    --destructive: 0 60% 66%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 120 39% 72.4%;
+    --success-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotateY-180 {
+  transform: rotateY(180deg);
+}
+
+.backfaceVisibility {
+  backface-visibility: hidden;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+@font-face {
+  font-family: 'DIN Next Arabic';
+  src: url('/fonts/DINNextLTArabic-Regular-3.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.perspective {
+  perspective: 1500px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.floating-heart {
+  position: absolute;
+  animation: float linear forwards;
+  z-index: 1;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-50px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: 'DIN Next Arabic';
+  src: url('/path-to-fonts/DINNextArabic-Regular.woff2') format('woff2'), 
+       url('/path-to-fonts/DINNextArabic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
